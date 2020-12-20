@@ -22,10 +22,10 @@ function eventListeners() {
   mensaje.addEventListener("blur", validarFormulario);
 
   //Reinicia el formulario
-  btnReset.addEventListener("click", resetearFormulario);
+  btnReset.addEventListener("reset", resetearFormulario);
 
   //Enviar email
-  formulario.addEventListener("button", enviarEmail);
+  formulario.addEventListener("submit", enviarEmail);
 }
 
 /* ------------- Funciones ------------- */
@@ -37,7 +37,7 @@ function iniciarApp() {
 
 //Valida el formulario
 function validarFormulario(e) {
-  if (e.target.value.lenght > 0) {
+  if (e.target.value.length > 0) {
     //Eliminar los errores al compltar los campos
     const error = document.querySelector("p.error");
     if (error) {
@@ -135,4 +135,12 @@ function enviarEmail(e) {
 function resetearFormulario() {
   formulario.reset();
   iniciarApp();
+  eliminarColores(email, asunto, mensaje);
+}
+function eliminarColores(correo, asunto, mensaje) {
+  const clases = "border-green-500"; //Se elimina los verdes al hacer exitoso el correo
+  const clases2 = "border-red-500"; //Se elimina los rojos al presionar cualquier campo, salirse, y darle al reset, se elimina los rojos
+  correo.classList.remove(clases, clases2);
+  asunto.classList.remove(clases, clases2);
+  mensaje.classList.remove(clases, clases2);
 }
