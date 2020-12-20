@@ -1,7 +1,7 @@
 /* ------------- Variables ------------- */
 
 const btnEnviar = document.querySelector("#enviar");
-
+const formulario = document.querySelector("#enviar-mail");
 const email = document.querySelector("#email");
 const asunto = document.querySelector("#asunto");
 const mensaje = document.querySelector("#mensaje");
@@ -12,7 +12,8 @@ function eventListeners() {
   document.addEventListener("DOMContentLoaded", iniciarApp);
 
   //Campos del formulario
-  email.addEventListener("blur", validarFormulario); //"blur" es el evento que ocurre al quitar el focus sobre el input
+  //"blur" es el evento que ocurre al quitar el focus sobre el input
+  email.addEventListener("blur", validarFormulario);
   asunto.addEventListener("blur", validarFormulario);
   mensaje.addEventListener("blur", validarFormulario);
 }
@@ -26,11 +27,33 @@ function iniciarApp() {
 
 //Valida el formulario
 function validarFormulario(e) {
-  console.log(e.target.value);
   if (e.target.value.lenght > 0) {
     console.log("si hay algo");
   } else {
     // e.target.style.borderBottomColor = "red";
     e.target.classList.add("border", "border-red-500");
+
+    mostrarError();
   }
+}
+
+function mostrarError() {
+  const mensajeError = document.createElement("p");
+  mensajeError.textContent = "Todos los campos son obligatorios";
+  mensajeError.classList.add(
+    "border",
+    "border-red-500",
+    "background-red-100",
+    "text-red-500",
+    "p-3",
+    "mt-5",
+    "text-center",
+    "error"
+  );
+
+  const errores = document.querySelectorAll(".error");
+  if (errores.length === 0) {
+    formulario.appendChild(mensajeError);
+  }
+
 }
